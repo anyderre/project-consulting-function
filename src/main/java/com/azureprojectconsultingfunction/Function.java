@@ -7,9 +7,6 @@ import com.microsoft.azure.functions.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Optional;
-import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.BlobServiceClientBuilder;
-// import org.springframework.cloud.function.adapter.azure.AzureSpringBootRequestHandler;
 import com.azureprojectconsultingfunction.Model.Product;
 
 
@@ -38,19 +35,13 @@ public class Function {
             final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
 
-        // Parse query parameter
-        // final String visitorId = request.getQueryParameters().get("visitorId ");
-        // final String sessionId = request.getQueryParameters().get("sessionId ");
-        // final String name = request.getBody().orElse(query);
-
         String connectionUrl = System.getenv("connection_string");
-        // String connectionUrl = "jdbc:sqlserver://23shophsalbsig.database.windows.net:1433;database=shop23hsalbsig;user=shophsalbsig@23shophsalbsig;password=12345shop.;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
         ResultSet resultSet =  null;
 
         List<Product> productList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(connectionUrl)) {
             PreparedStatement  statement;
-            String sqlQuery = "SELECT TOP 3 p.* FROM Event e LEFT JOIN Product p ON p.product_id = e.product_id WHERE e.session_id <> ?  AND e.visitor_id = ? AND event_type=? ORDER BY e.created_date DESC";
+            String sqlQuery = "SELECT TOP 3 p.* FROM events e LEFT JOIN Product p ON p.productId = e.productId WHERE e.sessionId <> ?  AND e.visitorId = ? AND eventType=? ORDER BY e.dateTime DESC";
             
             statement = connection.prepareStatement(sqlQuery);
             statement.setString(1, sessionId);
@@ -60,9 +51,20 @@ public class Function {
 
             while(resultSet.next()) {
                Product product = new Product();
-                product.setProductId(resultSet.getString("product_id"));
-                product.setName(resultSet.getString("product_name"));
-                product.setDescription(resultSet.getString("product_description"));
+                product.setProductId(resultSet.getString("productId"));
+                product.setBrand(resultSet.getString("brand"));
+                product.setDescription(resultSet.getString("description"));
+                product.setSku(resultSet.getString("sku"));
+                product.setPrice(resultSet.getInt("price"));
+                product.setCurrency(resultSet.getString("currency"));
+                product.setAvailability(resultSet.getString("availability"));
+                product.setItem_condition(resultSet.getString("item_condition"));
+                product.setGame_platform(resultSet.getString("game_platform"));
+                product.setOperating_systems(resultSet.getString("operating_systems"));
+                product.setImages(resultSet.getString("images"));
+                product.setCategory(resultSet.getString("category"));
+                product.setPublisher(resultSet.getString("publisher"));
+                product.setTitle(resultSet.getString("title"));
                 productList.add(product);
             }
         } catch (SQLException e) {
@@ -83,13 +85,5 @@ public class Function {
                    .body("Error: " + e.getMessage())
                    .build();
        }
-
-        // final String jsonDocument = "{\"visitorId\":\"" + visitorId + "\", " + 
-        //                                 "\"description\": \"" + sessionId + "\"}";
-        // if (visitorId == null) {
-        //     return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body("Please pass a name on the query string or in the request body").build();
-        // } else {
-        //     return request.createResponseBuilder(HttpStatus.OK).body(jsonDocument).build();
-        // }
     }
 }

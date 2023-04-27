@@ -14,7 +14,8 @@
         <java.version>11</java.version>
         <azure.functions.maven.plugin.version>1.25.0</azure.functions.maven.plugin.version>
         <azure.functions.java.library.version>3.0.0</azure.functions.java.library.version>
-        <functionAppName>Project_Consulting_Function-1681591120418</functionAppName>
+        <functionAppName>ProjectConsultingFunction54320</functionAppName>
+        <appServicePlanName></appServicePlanName>
         <functionDockerImageName>anyderre/project-consulting-function-java17:1.0.0</functionDockerImageName>
     </properties>
 

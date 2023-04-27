@@ -1,6 +1,6 @@
 {
   "azureFunctions.javaBuildTool": "maven",
-  "azureFunctions.deploySubpath": "target/azure-functions/Project_Consulting_Function-1681591120418",
+  "azureFunctions.deploySubpath": "target/azure-functions/ProjectConsultingFunction",
   "azureFunctions.projectLanguage": "Java",
   "azureFunctions.projectRuntime": "~4",
   "debug.internalConsoleOptions": "neverOpen",

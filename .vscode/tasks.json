@@ -8,7 +8,7 @@
       "problemMatcher": "$func-java-watch",
       "isBackground": true,
       "options": {
-        "cwd": "${workspaceFolder}/target/azure-functions/Project_Consulting_Function-1681591120418"
+        "cwd": "${workspaceFolder}/target/azure-functions/ProjectConsultingFunction"
       },
       "dependsOn": "package (functions)"
     },
