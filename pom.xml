@@ -16,7 +16,7 @@
         <azure.functions.java.library.version>3.0.0</azure.functions.java.library.version>
         <functionAppName>ProjectConsultingFunction54320</functionAppName>
         <appServicePlanName></appServicePlanName>
-        <functionDockerImageName>anyderre/project-consulting-function-java17:1.0.0</functionDockerImageName>
+        <functionDockerImageName>anyderre/project-consulting-function-java11:1.0.0</functionDockerImageName>
     </properties>
 
     <dependencies>
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
-            <version>11.2.3.jre17</version>
+            <version>11.2.2.jre11</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
